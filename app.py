@@ -81,8 +81,8 @@ def stations():
 def tobs():
     session = Session(engine)
     lateststr = session.query(Measurement.date).order_by(Measurement.date.desc()).first()[0]
-    latestdate = dt.datetime.strptime(lateststr, '%Y-%m-%d')
-    querydate = dt.date(latestdate.year -1, latestdate.month, latestdate.day)
+    last_date = dt.datetime.strptime(lateststr, '%Y-%m-%d')
+    querydate = dt.date(last_date.year -1, last_date.month, last_date.day)
     sel = [Measurement.date,Measurement.tobs]
     queryresult = session.query(*sel).filter(Measurement.date >= querydate).all()
     session.close()
